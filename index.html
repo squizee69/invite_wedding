@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="only light">
+  <meta name="theme-color" content="#1a1a1a">
+  <title>Никита &amp; Маргарита — 17.07.2027</title>
+  <meta name="description" content="Приглашение на свадьбу Никиты и Маргариты. 17 июля 2027, Санкт-Петербург.">
+  <meta property="og:title" content="Никита & Маргарита — 17.07.2027">
+  <meta property="og:description" content="Приглашаем вас разделить с нами радость этого незабываемого дня.">
+  <meta property="og:image" content="assets/hero.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600&family=Kurale&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Стартовый экран -->
+  <div class="startscreen" id="startscreen" aria-hidden="false">
+    <div class="startscreen__media">
+      <img src="assets/hero.png" alt="" class="startscreen__img" decoding="async">
+      <div class="startscreen__veil"></div>
+    </div>
+    <button type="button" class="startscreen__open" id="openInvite">
+      <span class="startscreen__open-label">Открыть приглашение</span>
+      <span class="startscreen__open-hint">нажмите, чтобы войти</span>
+    </button>
+  </div>
+
+  <audio id="bgMusic" loop preload="none" src="assets/music.mp3"></audio>
+
+  <header class="topbar" id="topbar" hidden>
+    <button type="button" class="music-btn" id="musicToggle" aria-label="Музыка" aria-pressed="false">
+      <svg class="icon-music" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="16" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+  </header>
+
+  <main class="invite" id="invite" hidden>
+    <!-- Hero -->
+    <section class="hero section" id="hero">
+      <div class="hero__ornament" aria-hidden="true"></div>
+      <p class="hero__eyebrow animate-in">Свадьба</p>
+      <h1 class="hero__names animate-in">
+        <span class="hero__name">Никита</span>
+        <span class="hero__amp" aria-hidden="true">&</span>
+        <span class="hero__name">Маргарита</span>
+      </h1>
+      <p class="hero__date animate-in">17 июля 2027</p>
+      <p class="hero__place animate-in">Санкт-Петербург</p>
+      <div class="scroll-hint animate-in" aria-hidden="true">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- Приглашение -->
+    <section class="section letter" id="letter">
+      <p class="letter__dear animate-in">Дорогой гость!</p>
+      <p class="letter__text animate-in">
+        Мы рады сообщить вам, что <strong>17.07.2027</strong> состоится самое главное торжество в нашей жизни — день нашей свадьбы!
+        Приглашаем вас разделить с нами радость этого незабываемого дня.
+      </p>
+      <p class="letter__sign animate-in">Ваши Никита и Маргарита</p>
+    </section>
+
+    <!-- Таймер -->
+    <section class="section countdown" id="countdown" aria-label="До свадьбы">
+      <h2 class="section__title animate-in">До торжества</h2>
+      <div class="countdown__grid animate-in" id="countdownGrid">
+        <div class="countdown__item"><span class="countdown__num" data-unit="days">0</span><span class="countdown__label">дней</span></div>
+        <div class="countdown__item"><span class="countdown__num" data-unit="hours">0</span><span class="countdown__label">часов</span></div>
+        <div class="countdown__item"><span class="countdown__num" data-unit="mins">0</span><span class="countdown__label">минут</span></div>
+        <div class="countdown__item"><span class="countdown__num" data-unit="secs">0</span><span class="countdown__label">секунд</span></div>
+      </div>
+    </section>
+
+    <!-- Календарик с сердечком -->
+    <section class="section calendar-block" id="calendar">
+      <h2 class="section__title animate-in">Календарь</h2>
+      <div class="mini-cal animate-in" aria-label="Июль 2027">
+        <div class="mini-cal__head">Июль 2027</div>
+        <div class="mini-cal__weekdays" aria-hidden="true">
+          <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+        </div>
+        <div class="mini-cal__days" id="miniCalDays"></div>
+      </div>
+      <a class="cal-link animate-in" id="addToCalendar" href="#" download="wedding.ics">Добавить в календарь</a>
+    </section>
+
+    <!-- Расписание с извилистой линией -->
+    <section class="section schedule" id="schedule">
+      <h2 class="section__title animate-in">Свадебное расписание</h2>
+      <p class="section__lead animate-in">17 июля 2027 · ЗАГС Красносельского района</p>
+
+      <div class="wave-tt" id="waveTt">
+        <svg class="wave-tt__svg" id="waveSvg" aria-hidden="true" preserveAspectRatio="none">
+          <path class="wave-tt__trail" id="waveTrail" fill="none"></path>
+          <path class="wave-tt__spine" id="waveSpine" fill="none"></path>
+        </svg>
+        <div class="wave-tt__heart" id="waveHeart" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22">
+            <path fill="currentColor" d="M12 21s-6.7-4.35-9.33-7.4C.8 11.4.5 8.6 2.1 6.7 3.5 5 5.9 4.6 7.7 5.8c.6.4 1.1.9 1.4 1.5.3-.6.8-1.1 1.4-1.5 1.8-1.2 4.2-.8 5.6.9 1.6 1.9 1.3 4.7-.57 6.9C18.7 16.65 12 21 12 21z"/>
+          </svg>
+        </div>
+
+        <ol class="wave-tt__list">
+          <li class="wave-tt__item" data-side="left">
+            <span class="wave-tt__anchor" aria-hidden="true"></span>
+            <div class="wave-tt__icon"><img src="assets/icons/20.svg" alt=""></div>
+            <div class="wave-tt__body">
+              <time class="wave-tt__time">11:20</time>
+              <h3 class="wave-tt__title">Сбор гостей</h3>
+              <p class="wave-tt__addr">Доблести, 36</p>
+              <p class="wave-tt__desc">Наша регистрация пройдет в залах ЗАГСа, приглашаем всех разделить с нами такой торжественный момент</p>
+            </div>
+          </li>
+          <li class="wave-tt__item" data-side="right">
+            <span class="wave-tt__anchor" aria-hidden="true"></span>
+            <div class="wave-tt__icon"><img src="assets/icons/19.svg" alt=""></div>
+            <div class="wave-tt__body">
+              <time class="wave-tt__time">11:40</time>
+              <h3 class="wave-tt__title">Торжественная регистрация</h3>
+              <p class="wave-tt__addr">Банкетный зал</p>
+              <p class="wave-tt__desc">Самый важный момент в нашей жизни</p>
+            </div>
+          </li>
+          <li class="wave-tt__item" data-side="left">
+            <span class="wave-tt__anchor" aria-hidden="true"></span>
+            <div class="wave-tt__icon"><img src="assets/icons/24.svg" alt=""></div>
+            <div class="wave-tt__body">
+              <time class="wave-tt__time">12:40</time>
+              <h3 class="wave-tt__title">Фотосессия молодоженов</h3>
+              <p class="wave-tt__addr">Красносельский район</p>
+              <p class="wave-tt__desc">До банкета у вас будет время, чтобы узнать друг друга поближе, пока молодожены вас покинут</p>
+            </div>
+          </li>
+          <li class="wave-tt__item" data-side="right">
+            <span class="wave-tt__anchor" aria-hidden="true"></span>
+            <div class="wave-tt__icon"><img src="assets/icons/1.svg" alt=""></div>
+            <div class="wave-tt__body">
+              <time class="wave-tt__time">14:00</time>
+              <h3 class="wave-tt__title">Праздничный банкет</h3>
+              <p class="wave-tt__addr">Санкт-Петербургское шоссе, 134БВ</p>
+              <p class="wave-tt__desc">Здесь пройдет наш праздничный банкет</p>
+            </div>
+          </li>
+          <li class="wave-tt__item" data-side="left">
+            <span class="wave-tt__anchor" aria-hidden="true"></span>
+            <div class="wave-tt__icon"><img src="assets/icons/23.svg" alt=""></div>
+            <div class="wave-tt__body">
+              <time class="wave-tt__time">20:00</time>
+              <h3 class="wave-tt__title">Окончание праздничного дня</h3>
+              <p class="wave-tt__addr">Терраса ресторана</p>
+              <p class="wave-tt__desc">Даже такой день может когда-то подойти к концу</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Ждем вас -->
+    <section class="section await" id="await">
+      <h2 class="section__title animate-in">Ждем вас</h2>
+      <p class="await__text animate-in">
+        Будем счастливы разделить этот день с вами.<br>
+        Ждем вас на нашей свадьбе!
+      </p>
+      <p class="await__place animate-in">ЗАГС Красносельского района<br>ул. Доблести 36, Санкт-Петербург</p>
+    </section>
+
+    <!-- Карта -->
+    <section class="section map" id="map">
+      <h2 class="section__title animate-in">Место проведения</h2>
+      <p class="map__place animate-in">ЗАГС Красносельского района</p>
+      <p class="map__addr animate-in">ул. Доблести 36, Санкт-Петербург</p>
+      <div class="map__frame animate-in">
+        <iframe
+          title="Карта: ЗАГС Красносельского района"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://yandex.ru/map-widget/v1/?ll=30.177085%2C59.847799&z=16&pt=30.177085%2C59.847799%2Cpm2rdm&l=map">
+        </iframe>
+      </div>
+      <a class="map__link animate-in" href="https://yandex.ru/maps/?pt=30.177085,59.847799&z=16&l=map" target="_blank" rel="noopener">Открыть в Яндекс.Картах</a>
+    </section>
+
+    <!-- Dress code -->
+    <section class="section dress" id="dress">
+      <h2 class="section__title animate-in">Дресс-код</h2>
+      <p class="section__lead animate-in">Будем благодарны, если при выборе нарядов на наше торжество вы придержитесь следующей палитры</p>
+      <div class="palette animate-in" role="list">
+        <span class="palette__swatch" style="--c:#f4efe8" title="Белый" role="listitem"></span>
+        <span class="palette__swatch" style="--c:#d9cfc3" title="Розовый" role="listitem"></span>
+        <span class="palette__swatch" style="--c:#a89888" title="Коричневый" role="listitem"></span>
+        <span class="palette__swatch" style="--c:#6e655c" title="Синий" role="listitem"></span>
+        <span class="palette__swatch" style="--c:#2a2622" title="Черный" role="listitem"></span>
+      </div>
+    </section>
+
+    <!-- RSVP + опрос -->
+    <section class="section rsvp" id="rsvp">
+      <h2 class="section__title animate-in">Подтверждение</h2>
+      <p class="section__lead animate-in">Пожалуйста, подтвердите присутствие и ответьте на несколько вопросов</p>
+
+      <form class="form animate-in" id="rsvpForm" novalidate>
+        <div class="field">
+          <label for="guestName">Имя и фамилия</label>
+          <input id="guestName" name="name" type="text" autocomplete="name" required placeholder="Как к вам обращаться">
+        </div>
+
+        <div class="field">
+          <label for="guestPhone">Телефон</label>
+          <input id="guestPhone" name="phone" type="tel" autocomplete="tel" placeholder="+7 …">
+        </div>
+
+        <fieldset class="field field--choice">
+          <legend>Сможете ли вы присутствовать?</legend>
+          <label class="choice"><input type="radio" name="attendance" value="Да" required> Да, буду</label>
+          <label class="choice"><input type="radio" name="attendance" value="Нет"> К сожалению, нет</label>
+          <label class="choice"><input type="radio" name="attendance" value="Может быть"> Пока не уверен(а)</label>
+        </fieldset>
+
+        <fieldset class="field field--choice" data-survey>
+          <legend>Потребуется ли вам трансфер?</legend>
+          <label class="choice"><input type="radio" name="transfer" value="Нет"> Нет</label>
+          <label class="choice"><input type="radio" name="transfer" value="Только до торжества"> Только до торжества</label>
+          <label class="choice"><input type="radio" name="transfer" value="Только после торжества"> Только после торжества</label>
+          <label class="choice"><input type="radio" name="transfer" value="До и после торжества"> До и после торжества</label>
+        </fieldset>
+
+        <fieldset class="field field--choice" data-survey>
+          <legend>Есть ли у вас особые предпочтения по еде?</legend>
+          <label class="choice"><input type="radio" name="food" value="нет"> нет</label>
+          <label class="choice"><input type="radio" name="food" value="не ем мясо"> не ем мясо</label>
+          <label class="choice"><input type="radio" name="food" value="не ем рыбу"> не ем рыбу</label>
+          <label class="choice"><input type="radio" name="food" value="вегетарианец"> вегетарианец</label>
+        </fieldset>
+
+        <fieldset class="field field--choice" data-survey>
+          <legend>Какой алкоголь вы предпочитаете?</legend>
+          <label class="choice"><input type="radio" name="alcohol" value="Красное вино"> Красное вино</label>
+          <label class="choice"><input type="radio" name="alcohol" value="Белое вино"> Белое вино</label>
+          <label class="choice"><input type="radio" name="alcohol" value="Шампанское"> Шампанское</label>
+          <label class="choice"><input type="radio" name="alcohol" value="Виски/коньяк"> Виски/коньяк</label>
+          <label class="choice"><input type="radio" name="alcohol" value="Водка"> Водка</label>
+          <label class="choice"><input type="radio" name="alcohol" value="Не буду пить алкоголь"> Не буду пить алкоголь</label>
+        </fieldset>
+
+        <div class="field">
+          <label for="guestComment">Комментарий или пожелания</label>
+          <textarea id="guestComment" name="comment" rows="3" placeholder="Необязательно"></textarea>
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">Отправить ответ</button>
+        <p class="form__note" id="formNote" hidden></p>
+        <p class="form__success" id="formSuccess" hidden>Спасибо! Ваш ответ отправлен.</p>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <p class="footer__names">Никита &amp; Маргарита</p>
+      <p class="footer__date">17.07.2027</p>
+    </footer>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
