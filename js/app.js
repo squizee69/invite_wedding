@@ -154,7 +154,7 @@
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     const heartSvg =
-      '<span class="mini-cal__heart" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-6.7-4.35-9.33-7.4C.8 11.4.5 8.6 2.1 6.7 3.5 5 5.9 4.6 7.7 5.8c.6.4 1.1.9 1.4 1.5.3-.6.8-1.1 1.4-1.5 1.8-1.2 4.2-.8 5.6.9 1.6 1.9 1.3 4.7-.57 6.9C18.7 16.65 12 21 12 21z"/></svg></span>';
+      '<span class="mini-cal__heart" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-6.7-4.35-9.33-7.4c-1.87-2.2-2.17-5-0.57-6.9 1.4-1.7 3.8-2.1 5.6-0.9 0.6 0.4 1.1 0.9 1.4 1.5 0.3-0.6 0.8-1.1 1.4-1.5 1.8-1.2 4.2-0.8 5.6 0.9 1.6 1.9 1.3 4.7-0.57 6.9-2.63 3.05-9.33 7.4-9.33 7.4z"/></svg></span>';
 
     let html = "";
     for (let i = 0; i < startPad; i++) {
