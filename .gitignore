@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+*.log
+_preview*
+_user*
+_invdata*
+_data/
